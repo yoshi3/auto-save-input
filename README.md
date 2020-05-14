@@ -3,7 +3,7 @@
 
 [A simple poor test sample here...:cyclone:](https://yoshi3.github.io/auto-save-input/)
 
-## TODP
+## TOD
 - [ ] Add all test cases left to do.
 - [ ] Write the API document.
 - [ ] Implement neatly the sample page.
