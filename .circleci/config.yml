@@ -1,0 +1,39 @@
+aliases:
+  - &working_directory ~/repo
+  - &image circleci/node:12
+  - &restore_cache
+    key: v1-npm-deps-{{ checksum "yarn.lock" }}
+  - &save_cache
+    key: v1-npm-deps-{{ checksum "yarn.lock" }}
+    paths:
+      - node_modules
+
+version: 2
+jobs:
+  build_test:
+    working_directory: *working_directory
+    docker:
+      - image: *image
+    steps:
+      - checkout
+      - restore_cache: *restore_cache
+      - run: yarn install
+      - save_cache: *save_cache
+      - run: yarn build
+      - run:
+          command: yarn test:ci
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: 'reports/junit'
+      - store_test_results:
+          path: reports/junit
+      - store_artifacts:
+          path: reports/junit
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+
+workflows:
+  version: 2
+  build_test:
+    jobs:
+      - build_test

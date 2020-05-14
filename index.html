@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>auto-save-input</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <textarea id="a"></textarea>
+    <input id="b" value="" />
+    <div id="c"></div>
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        const autoSaveInput1 = new AutoSaveInput('keyName');
+        autoSaveInput1.add('#a');
+        const autoSaveInput2 = new AutoSaveInput('keyName', 0);
+        autoSaveInput2.add('#b');
+      });
+    </script>
+    <script src="./index.js"></script>
+  </body>
+</html>
